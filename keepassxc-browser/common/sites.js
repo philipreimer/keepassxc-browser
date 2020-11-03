@@ -34,7 +34,8 @@ const PREDEFINED_SITELIST = [
     'https://signin.ebay.in/*',
     'https://signin.ebay.ph/*',
     'https://login.yahoo.com/*',
-    'https://*.atlassian.com/*'
+    'https://*.atlassian.com/*',
+    'https://www.fidelity.com/*'
 ];
 
 const kpxcSites = {};
@@ -50,12 +51,14 @@ kpxcSites.exceptionFound = function(classList) {
         return;
     }
 
-    // Apple ID
     if (document.location.origin === 'https://idmsa.apple.com'
         && [ 'password', 'form-row', 'show-password' ].every(c => classList.contains(c))) {
         return true;
     } else if (document.location.origin.startsWith('https://signin.ebay.com')
                && classList.contains('null')) {
+        return true;
+    } else if (document.location.origin.startsWith('https://www.fidelity.com')
+               && classList.contains('fs-mask-username')) {
         return true;
     }
 
